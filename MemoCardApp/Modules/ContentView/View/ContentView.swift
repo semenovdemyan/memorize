@@ -2,11 +2,10 @@
 //  Memo Card App
 
 //  Created by Demian on 28.01.2026.
+//MARK: View — только отображает и шлёт события
+//MARK: ViewModel — управляет состоянием и логикой
+//MARK: Model — чистые данные (карта, игра, emoji и т.д.)
 
-//View — только отображает и шлёт события
-//ViewModel — управляет состоянием и логикой
-//Model — чистые данные (карта, игра, emoji и т.д.)
-//
 // CMD + Shift + L  вызывает библиотеку
 // ctrl + CMD + Space вызывает клавиатуру Emoji
 
@@ -32,9 +31,12 @@ struct ContentView: View {
 			VStack {
 				if viewModel.isGameOver {
 					Spacer()
+
 					EndOfGameView(viewModel: viewModel)
 						.transition(.scale)
+						.transition(.opacity)
 						.zIndex(1)
+
 					Spacer()
 				} else {
 					GeometryReader { geo in
@@ -47,12 +49,15 @@ struct ContentView: View {
 									.frame(width: 64, height: 64)
 								}
 							}
+							.padding(.bottom, 100)
 							.frame(minHeight: geo.size.height)
 						}
 					}
+					.transition(.scale)
+					.transition(.opacity)
 				}
 			}
-			.animation(.easeInOut, value: viewModel.isGameOver)
+			.animation(.easeIn, value: viewModel.isGameOver)
 			ControlPanelView(viewModel: viewModel)
 		}
 	}
