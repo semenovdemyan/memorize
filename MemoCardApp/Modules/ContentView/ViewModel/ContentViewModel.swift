@@ -2,32 +2,26 @@
 //  MemoCardApp
 
 //  Created by Demian on 08.02.2026.
-
-//ViewModel будет:
-// 1. хранить все карты
-// 2. управлять cardsCount
-// 3. отдавать только нужное количество карт
-
 internal import Combine
 import SwiftUI
 
 final class ContentViewModel: ObservableObject {
-
 	@Published private(set) var cardViewModels: [CardViewModel] = []
 	@Published var cardsCount: Int = 8
 	@Published var isGameOver: Bool = false
 
-	var visibleCards: ArraySlice<CardViewModel> {
-		cardViewModels.prefix(cardsCount)
-	}
+	var visibleCards: [CardViewModel] { Array(cardViewModels.prefix(cardsCount)) }
 
 	private let baseEmojis = [
-		"🦅", "🐈", "🦨", "🐄", "🦜", "🦫", "🐇", "🦘",
-		"🦭", "🦍", "🦃", "🦉", "🐢", "🐅", "🦓", "🦬",
-		"🦝", "🦥", "🦩", "🐿️", "🐘", "🦏", "🐕", "🦌",
+		"🦅", "🐈", "🦨", "🐄",
+		"🦜", "🦫", "🐇", "🦘",
+		"🦭", "🦍", "🦃", "🦉",
+		"🐢", "🐅", "🦓", "🦬",
+		"🦝", "🦥", "🦩", "🐿️",
+		"🐘", "🦏", "🐕", "🦌",
 	]
 
-	private var indexOfTheOneAndOnlyFaceUpCard: Int?
+	private var faceUpIndex: Int?
 
 	init() {
 		resetGame()
@@ -41,7 +35,7 @@ final class ContentViewModel: ObservableObject {
 			CardViewModel(card: Card(content: $0))
 		}
 
-		indexOfTheOneAndOnlyFaceUpCard = nil
+		faceUpIndex = nil
 		isGameOver = false
 	}
 
@@ -66,43 +60,37 @@ final class ContentViewModel: ObservableObject {
 			!cardViewModels[chosenIndex].isFaceUp
 		else { return }
 
-		if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
-
+		guard let matchIndex = faceUpIndex else {
+			cardViewModels.indices.forEach { cardViewModels[$0].isFaceUp = false }
 			cardViewModels[chosenIndex].isFaceUp = true
+			faceUpIndex = chosenIndex
+			return
+		}
 
-			if cardViewModels[chosenIndex].card.content
-				== cardViewModels[potentialMatchIndex].card.content
-			{
+		cardViewModels[chosenIndex].isFaceUp = true
+		faceUpIndex = nil
 
-				cardViewModels[chosenIndex].isMatched = true
-				cardViewModels[potentialMatchIndex].isMatched = true
+		let chosen = cardViewModels[chosenIndex]
+		let matched = cardViewModels[matchIndex]
 
-				if visibleCards.allSatisfy({ $0.isMatched }) {
-					DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-						self.isGameOver = true
-					}
-				}
+		if chosen.card.content == matched.card.content {
+			chosen.isMatched = true
+			matched.isMatched = true
 
-			} else {
-				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-					guard let self = self else { return }
-					guard chosenIndex < self.cardViewModels.count,
-						potentialMatchIndex < self.cardViewModels.count
-					else { return }
+			cardViewModels[chosenIndex] = chosen
+			cardViewModels[matchIndex] = matched
 
-					self.cardViewModels[chosenIndex].isFaceUp = false
-					self.cardViewModels[potentialMatchIndex].isFaceUp = false
+			if visibleCards.allSatisfy(\.isMatched) {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+					self.isGameOver = true
 				}
 			}
+			return
+		}
 
-			indexOfTheOneAndOnlyFaceUpCard = nil
-
-		} else {
-			cardViewModels.indices.forEach {
-				cardViewModels[$0].isFaceUp = false
-			}
-			cardViewModels[chosenIndex].isFaceUp = true
-			indexOfTheOneAndOnlyFaceUpCard = chosenIndex
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+			self.cardViewModels[chosenIndex].isFaceUp = false
+			self.cardViewModels[matchIndex].isFaceUp = false
 		}
 	}
 }
