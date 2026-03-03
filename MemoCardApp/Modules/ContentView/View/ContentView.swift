@@ -15,10 +15,11 @@ struct ContentView: View {
 	@StateObject private var viewModel = ContentViewModel()
 	@Environment(\.colorScheme) private var colorScheme
 
-	private let columns = Array(
-		repeating: GridItem(.flexible()),
-		count: 4
-	)
+	private let spacing: CGFloat = 0
+
+	private var columns: [GridItem] {
+		[GridItem(.adaptive(minimum: 80), spacing: spacing)]
+	}
 
 	var body: some View {
 		ZStack {
@@ -30,27 +31,28 @@ struct ContentView: View {
 
 			VStack {
 				if viewModel.isGameOver {
-					Spacer()
-
 					EndOfGameView(viewModel: viewModel)
 						.transition(.scale)
 						.transition(.opacity)
 						.zIndex(1)
 
-					Spacer()
 				} else {
 					GeometryReader { geo in
-						ScrollView {
-							LazyVGrid(columns: columns) {
-								ForEach(viewModel.visibleCards) { CardViewModel in
-									CardView(viewModel: CardViewModel) {
-										viewModel.choose(CardViewModel)
+						HStack {
+							Spacer()
+							ScrollView {
+								LazyVGrid(columns: columns, spacing: spacing) {
+									ForEach(viewModel.visibleCards) { CardViewModel in
+										CardView(viewModel: CardViewModel) {
+											viewModel.choose(CardViewModel)
+										}
 									}
-									.frame(width: 64, height: 64)
 								}
+								.frame(minHeight: geo.size.height)
+								.padding(.bottom, 100)
 							}
-							.padding(.bottom, 100)
-							.frame(minHeight: geo.size.height)
+
+							Spacer()
 						}
 					}
 					.transition(.scale)
