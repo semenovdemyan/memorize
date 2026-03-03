@@ -9,7 +9,7 @@ struct EndOfGameView: View {
 	@ObservedObject var viewModel: ContentViewModel
 
 	var body: some View {
-		VStack(spacing: 20) {
+		VStack(spacing: 30) {
 			Text("End of Game")
 				.font(.largeTitle)
 				.foregroundColor(.gray)
@@ -28,9 +28,9 @@ struct EndOfGameView: View {
 					.adaptiveGlass()
 			}.font(.callout)
 		}
-		.padding()
+		.padding(30)
 		.background(.ultraThinMaterial)
-		.cornerRadius(20)
+		.cornerRadius(25)
 	}
 }
 

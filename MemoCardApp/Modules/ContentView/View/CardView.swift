@@ -16,23 +16,19 @@ struct CardView: View {
 				faceDown
 			}
 		}
+		.aspectRatio(2 / 3, contentMode: .fit)
 		.onTapGesture {
 			onTap()
 		}
 	}
 }
-
 extension CardView {
 	fileprivate var faceUp: some View {
 		ZStack {
 			Circle()
-				.frame(width: 64, height: 64)
 				.glassEffect()
 				.shadow(radius: 30)
-				.overlay(
-					viewModel.isMatched ? Circle().stroke(.green, lineWidth: 1) : nil
-				)
-
+				.overlay(viewModel.isMatched ? Circle().stroke(.green, lineWidth: 1) : nil)
 			Text(viewModel.card.content)
 				.font(.title)
 		}
@@ -40,11 +36,11 @@ extension CardView {
 
 	fileprivate var faceDown: some View {
 		Circle()
-			.frame(width: 44, height: 44)
 			.adaptiveGlass()
-			.overlay(
-				Circle()
-					.stroke(Color.gray.opacity(0.3), lineWidth: 1)
-			)
+			.overlay(Circle().stroke(Color.gray.opacity(0.3), lineWidth: 1))
 	}
+}
+
+#Preview {
+	CardView(viewModel: CardViewModel(card: .init(content: "")), onTap: {})
 }
