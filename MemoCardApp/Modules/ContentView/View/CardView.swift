@@ -40,7 +40,3 @@ extension CardView {
 			.overlay(Circle().stroke(Color.gray.opacity(0.3), lineWidth: 1))
 	}
 }
-
-#Preview {
-	CardView(viewModel: CardViewModel(card: .init(content: "")), onTap: {})
-}

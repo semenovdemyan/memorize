@@ -33,7 +33,3 @@ struct EndOfGameView: View {
 		.cornerRadius(25)
 	}
 }
-
-#Preview {
-	EndOfGameView(viewModel: ContentViewModel())
-}

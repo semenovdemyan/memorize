@@ -1,12 +1,12 @@
 //
-//  ControlPanelView.swift
+//  TopPanelView.swift
 //  MemoCardApp
 //
 //  Created by Demian on 22.02.2026.
 
 import SwiftUI
 
-struct ControlPanelView: View {
+struct TopPanelView: View {
 
 	@ObservedObject var viewModel: ContentViewModel
 
