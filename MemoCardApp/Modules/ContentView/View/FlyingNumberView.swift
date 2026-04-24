@@ -1,4 +1,3 @@
-//
 //  FlyingNumber.swift
 //  MemoCardApp
 //

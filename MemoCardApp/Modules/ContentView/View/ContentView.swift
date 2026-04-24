@@ -29,6 +29,8 @@ struct ContentView: View {
 				.blur(radius: 20)
 				.scaleEffect(1.2)
 
+
+
 			VStack {
 				if viewModel.isGameOver {
 					EndOfGameView(viewModel: viewModel)
@@ -42,9 +44,9 @@ struct ContentView: View {
 							Spacer()
 							ScrollView {
 								LazyVGrid(columns: columns, spacing: spacing) {
-									ForEach(viewModel.visibleCards) { CardViewModel in
-										CardView(viewModel: CardViewModel) {
-											viewModel.choose(CardViewModel)
+									ForEach(viewModel.visibleCards) { cardVM in
+										CardView(viewModel: cardVM) {
+											viewModel.choose(cardVM)
 										}
 									}
 								}
@@ -55,12 +57,16 @@ struct ContentView: View {
 							Spacer()
 						}
 					}
-					.transition(.scale)
-					.transition(.opacity)
+					.id(viewModel.visibleCards.count)
 				}
 			}
 			.animation(.easeIn, value: viewModel.isGameOver)
-			ControlPanelView(viewModel: viewModel)
+			VStack {
+				TopPanelView(viewModel: viewModel)
+				ControlPanelView(viewModel: viewModel)
+			}
+			.padding(.horizontal, 16)
+
 		}
 	}
 }

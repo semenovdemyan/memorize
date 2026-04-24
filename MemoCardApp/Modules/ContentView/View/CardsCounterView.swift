@@ -2,6 +2,7 @@
 //  MemoCardApp
 //
 //  Created by Demian on 08.02.2026.
+
 import SwiftUI
 
 struct CardsCounterView: View {

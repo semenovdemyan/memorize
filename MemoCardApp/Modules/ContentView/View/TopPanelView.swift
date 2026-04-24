@@ -1,4 +1,3 @@
-//
 //  TopPanelView.swift
 //  MemoCardApp
 //
@@ -12,44 +11,40 @@ struct TopPanelView: View {
 
 	var body: some View {
 		VStack {
-			Spacer()
+
 			HStack {
 				Button {
-					viewModel.increaseCards()
+					//					viewModel.increaseCards()
 				} label: {
-					Image(systemName: "plus")
-						.frame(width: 64, height: 64)
-						.adaptiveGlass()
+					//					Image(systemName: "plus")
+					//						.frame(width: 64, height: 64)
+					//						.adaptiveGlass()
 				}
 				.disabled(viewModel.cardsCount >= 48)
 
 				Spacer()
 
-				Button {
-					viewModel.shuffleCards()
-				} label: {
-					Text("Shuffle")
-					Image(systemName: "shuffle")
-				}
-				.frame(width: 145, height: 64)
-				.adaptiveGlass()
-				.disabled(viewModel.cardsCount >= 48)
+				CardsCounterView(count: viewModel.cardsCount)
 
 				Spacer()
 
 				Button {
-					viewModel.decreaseCards()
+					//					viewModel.decreaseCards()
 				} label: {
-					Image(systemName: "minus")
-						.frame(width: 64, height: 64)
-						.adaptiveGlass()
+					//					Image(systemName: "minus")
+					//						.frame(width: 64, height: 64)
+					//						.adaptiveGlass()
 				}
-				.disabled(viewModel.cardsCount <= 8)
+				//				.disabled(viewModel.cardsCount <= 8)
 			}
-			.padding(14)
 			.adaptiveGlass()
 			.foregroundColor(.gray)
-			.padding(.horizontal, 10)
+
+			Spacer()
 		}
 	}
+}
+
+#Preview {
+	TopPanelView(viewModel: ContentViewModel())
 }

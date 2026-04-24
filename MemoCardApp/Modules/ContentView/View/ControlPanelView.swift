@@ -1,4 +1,3 @@
-//
 //  ControlPanelView.swift
 //  MemoCardApp
 //
@@ -16,6 +15,7 @@ struct ControlPanelView: View {
 			HStack {
 				Button {
 					viewModel.increaseCards()
+					print("INCREASE +4")
 				} label: {
 					Image(systemName: "plus")
 						.frame(width: 64, height: 64)
@@ -27,6 +27,7 @@ struct ControlPanelView: View {
 
 				Button {
 					viewModel.shuffleCards()
+					print("SHUFFLE")
 				} label: {
 					Text("Shuffle")
 					Image(systemName: "shuffle")
@@ -39,6 +40,7 @@ struct ControlPanelView: View {
 
 				Button {
 					viewModel.decreaseCards()
+					print("DECREASE -4")
 				} label: {
 					Image(systemName: "minus")
 						.frame(width: 64, height: 64)
@@ -49,7 +51,6 @@ struct ControlPanelView: View {
 			.padding(14)
 			.adaptiveGlass()
 			.foregroundColor(.gray)
-			.padding(.horizontal, 10)
 		}
 	}
 }
