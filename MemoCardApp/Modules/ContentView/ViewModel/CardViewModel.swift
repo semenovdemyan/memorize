@@ -21,7 +21,6 @@ final class CardViewModel: ObservableObject, Identifiable {
 	}
 
 	var cardStatus: CardStatus {
-		if isMatched && !isFaceUp { return .matched }
 		if isFaceUp { return .faceUp }
 		return .faceDown
 	}

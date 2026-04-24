@@ -90,7 +90,7 @@ final class ContentViewModel: ObservableObject {
 			} else {
 				print("No match 😢")
 				isProcessingMatch = true
-				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
 					self.cards[firstOpenIndex].turnFaceDown()
 					self.cards[cardIndex].turnFaceDown()
 					self.isProcessingMatch = false
