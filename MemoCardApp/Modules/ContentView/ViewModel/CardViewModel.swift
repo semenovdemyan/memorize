@@ -3,7 +3,6 @@
 //  MemoCardApp
 //
 //  Created by Demian on 10.02.2026.
-//
 
 internal import Combine
 import Foundation
@@ -13,53 +12,53 @@ final class CardViewModel: ObservableObject, Identifiable {
 
 	@Published private(set) var isFaceUp: Bool = false
 	@Published private(set) var isMatched: Bool = false
+	@Published private(set) var shouldShowMismatch = false
 
+	private var mismatchWorkItem: DispatchWorkItem?
 	var id: UUID { card.id }
 
-	var displayContent: String {
+	var content: String {
 		isFaceUp || isMatched ? card.content : "?"
 	}
 
-	var cardStatus: CardStatus {
-		if isFaceUp { return .faceUp }
-		return .faceDown
-	}
-
 	var isInteractive: Bool {
-		!isMatched && !isFaceUp
+		guard !isMatched else { return false }
+		return !isFaceUp
 	}
 
 	init(card: Card) {
 		self.card = card
 	}
 
-	func turnFaceUp() {
-		guard !isMatched, !isFaceUp else { return }
-		isFaceUp = true
-	}
-
-	func turnFaceDown() {
-		guard !isMatched, isFaceUp else { return }
-		isFaceUp = false
+	func flip() {
+		guard !isMatched else { return }
+		isFaceUp.toggle()
 	}
 
 	func markAsMatched() {
 		guard !isMatched else { return }
+
+		mismatchWorkItem?.cancel()
+		mismatchWorkItem = nil
+
 		isMatched = true
 		isFaceUp = true
 	}
 
-	func reset() {
-		isFaceUp = false
-		isMatched = false
-	}
+	func showMismatch() {
+		mismatchWorkItem?.cancel()
 
-	func flip() {
-		isFaceUp.toggle()
-	}
+		let workItem = DispatchWorkItem { [weak self] in
+			guard let self = self else { return }
+			self.shouldShowMismatch = true
 
-	func matches(with other: CardViewModel) -> Bool {
-		return card.content == other.card.content
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+				self?.shouldShowMismatch = false
+			}
+		}
+
+		mismatchWorkItem = workItem
+		DispatchQueue.main.async(execute: workItem)
 	}
 }
 
@@ -69,16 +68,20 @@ extension CardViewModel {
 		case faceUp
 		case matched
 	}
+
+	var cardStatus: CardStatus {
+		if isMatched {
+			return .matched
+		} else if isFaceUp {
+			return .faceUp
+		} else {
+			return .faceDown
+		}
+	}
 }
 
 extension CardViewModel: Equatable {
 	static func == (lhs: CardViewModel, rhs: CardViewModel) -> Bool {
 		lhs.id == rhs.id
-	}
-}
-
-extension CardViewModel: Hashable {
-	func hash(into hasher: inout Hasher) {
-		hasher.combine(id)
 	}
 }

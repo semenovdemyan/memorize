@@ -2,18 +2,13 @@
 //  Memo Card App
 
 //  Created by Demian on 28.01.2026.
-//MARK: View — только отображает и шлёт события
-//MARK: ViewModel — управляет состоянием и логикой
-//MARK: Model — чистые данные (карта, игра, emoji и т.д.)
-
-// CMD + Shift + L  вызывает библиотеку
-// ctrl + CMD + Space вызывает клавиатуру Emoji
 
 import SwiftUI
 
 struct ContentView: View {
 	@StateObject private var viewModel = ContentViewModel()
 	@Environment(\.colorScheme) private var colorScheme
+	@State private var showEndGame = false
 
 	private let spacing: CGFloat = 0
 
@@ -29,15 +24,11 @@ struct ContentView: View {
 				.blur(radius: 20)
 				.scaleEffect(1.2)
 
-
-
 			VStack {
-				if viewModel.isGameOver {
+				if showEndGame {
 					EndOfGameView(viewModel: viewModel)
-						.transition(.scale)
-						.transition(.opacity)
+						.transition(.scale.combined(with: .opacity))
 						.zIndex(1)
-
 				} else {
 					GeometryReader { geo in
 						HStack {
@@ -53,20 +44,31 @@ struct ContentView: View {
 								.frame(minHeight: geo.size.height)
 								.padding(.bottom, 100)
 							}
-
 							Spacer()
 						}
 					}
 					.id(viewModel.visibleCards.count)
 				}
 			}
-			.animation(.easeIn, value: viewModel.isGameOver)
+			.animation(.easeInOut(duration: 0.5), value: showEndGame)
+
 			VStack {
 				TopPanelView(viewModel: viewModel)
+				Spacer()
 				ControlPanelView(viewModel: viewModel)
 			}
 			.padding(.horizontal, 16)
-
+		}
+		.onChange(of: viewModel.isGameOver) { oldValue, newValue in
+			if newValue {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+					withAnimation {
+						showEndGame = true
+					}
+				}
+			} else {
+				showEndGame = false
+			}
 		}
 	}
 }

@@ -3,7 +3,6 @@
 //  MemoCardApp
 //
 //  Created by Demian on 08.02.2026.
-//
 
 internal import Combine
 import SwiftUI
@@ -12,12 +11,12 @@ final class ContentViewModel: ObservableObject {
 	@Published private(set) var cards: [CardViewModel] = []
 	@Published var cardsCount: Int = 8
 	@Published var isGameOver: Bool = false
-	//	@Published var collectAnimationID = UUID()
-	//	@Published var wrongMatchHapticTrigger: Int = 0
-	//	@Published var score: Int = 0
-	var visibleCards: [CardViewModel] {
-		cards
-	}
+
+	private var firstSelectedCard: CardViewModel?
+	private var isWaitingForReset = false
+
+	var visibleCards: [CardViewModel] { cards }
+
 	private let baseEmojis = [
 		"🦅", "🐈", "🦨", "🐄",
 		"🦜", "🦫", "🐇", "🦘",
@@ -26,40 +25,28 @@ final class ContentViewModel: ObservableObject {
 		"🦝", "🦥", "🦩", "🐿️",
 		"🐘", "🦏", "🐕", "🦌",
 	]
-	private func index(of card: CardViewModel) -> Int? {
-		cards.firstIndex(where: { $0.id == card.id })
-	}
-	private var faceUpIndex: Int?
-	private var isProcessingMatch = false
-	private var pendingMatchWorkItem: DispatchWorkItem?
 
 	init() {
 		resetGame()
 	}
 
 	func resetGame() {
-		pendingMatchWorkItem?.cancel()
-		pendingMatchWorkItem = nil
-		isProcessingMatch = false
+		isWaitingForReset = false
+		firstSelectedCard = nil
 
 		let selected = baseEmojis.shuffled().prefix(cardsCount / 2)
 		let allEmojis = (selected + selected).shuffled()
 		let newCards = allEmojis.map { CardViewModel(card: Card(content: $0)) }
 
-		faceUpIndex = nil
 		isGameOver = false
 		cards = newCards
 	}
 
 	func shuffleCards() {
 		guard !cards.isEmpty else { return }
-
-		pendingMatchWorkItem?.cancel()
-		pendingMatchWorkItem = nil
-		isProcessingMatch = false
-
 		cards.shuffle()
-		faceUpIndex = nil
+		firstSelectedCard = nil
+		resetGame()
 	}
 
 	func increaseCards() {
@@ -75,33 +62,68 @@ final class ContentViewModel: ObservableObject {
 	}
 
 	func choose(_ card: CardViewModel) {
-		guard isGameOver == false else { return }
-		guard !card.isMatched else { return }
-		guard !card.isFaceUp else { return }
-		guard !isProcessingMatch else { return }
-		guard let cardIndex = index(of: card) else { return }
-		cards[cardIndex].turnFaceUp()
+		guard canSelectCard(card) else { return }
 
-		if let firstOpenIndex = faceUpIndex {
-			if cards[firstOpenIndex].matches(with: cards[cardIndex]) {
-				print("Match found! 🎉")
-				cards[firstOpenIndex].markAsMatched()
-				cards[cardIndex].markAsMatched()
-			} else {
-				print("No match 😢")
-				isProcessingMatch = true
-				DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-					self.cards[firstOpenIndex].turnFaceDown()
-					self.cards[cardIndex].turnFaceDown()
-					self.isProcessingMatch = false
-				}
-			}
-			faceUpIndex = nil
+		if let firstCard = firstSelectedCard {
+			handleSecondCard(card, firstCard: firstCard)
 		} else {
-			faceUpIndex = cardIndex
+			selectFirstCard(card)
 		}
-		if cards.allSatisfy({ $0.isMatched }) {
-			isGameOver = true
+	}
+
+	private func canSelectCard(_ card: CardViewModel) -> Bool {
+		guard card.isInteractive else { return false }
+		guard !isWaitingForReset else { return false }
+		return true
+	}
+
+	private func selectFirstCard(_ card: CardViewModel) {
+		firstSelectedCard = card
+		card.flip()
+	}
+
+	private func handleSecondCard(
+		_ secondCard: CardViewModel,
+		firstCard: CardViewModel
+	) {
+		guard firstCard.id != secondCard.id else { return }
+		secondCard.flip()
+
+		if areCardsMatching(firstCard, secondCard) {
+			handleMatch(firstCard, secondCard)
+		} else {
+			handleMismatch(firstCard, secondCard)
 		}
+	}
+
+	private func areCardsMatching(_ card1: CardViewModel, _ card2: CardViewModel)
+		-> Bool
+	{
+		card1.card.content == card2.card.content
+	}
+
+	private func handleMatch(_ card1: CardViewModel, _ card2: CardViewModel) {
+		card1.markAsMatched()
+		card2.markAsMatched()
+		firstSelectedCard = nil
+		checkGameOver()
+	}
+
+	private func handleMismatch(_ card1: CardViewModel, _ card2: CardViewModel) {
+		card1.showMismatch()
+		card2.showMismatch()
+
+		firstSelectedCard = nil
+		isWaitingForReset = true
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+			card1.flip()
+			card2.flip()
+			self?.isWaitingForReset = false
+		}
+	}
+
+	private func checkGameOver() {
+		isGameOver = cards.allSatisfy { $0.isMatched }
 	}
 }
