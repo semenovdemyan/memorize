@@ -8,12 +8,34 @@ import SwiftUI
 struct ContentView: View {
 	@StateObject private var viewModel = ContentViewModel()
 	@Environment(\.colorScheme) private var colorScheme
+	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
+	@Environment(\.verticalSizeClass) private var verticalSizeClass
 	@State private var showEndGame = false
 
-	private let spacing: CGFloat = 0
+	private let spacing: CGFloat = 12
+
+	private var columnsCount: Int {
+		if horizontalSizeClass == .regular {
+			return 4
+		} else {
+			return verticalSizeClass == .compact ? 8 : 4
+		}
+	}
 
 	private var columns: [GridItem] {
-		[GridItem(.adaptive(minimum: 80), spacing: spacing)]
+		Array(
+			repeating: GridItem(.flexible(), spacing: spacing),
+			count: columnsCount
+		)
+	}
+
+	private func calculateCardSize(in geometry: GeometryProxy) -> CGFloat {
+		let totalWidth = geometry.size.width * 0.9
+		let totalSpacing = spacing * CGFloat(columnsCount + 2)
+		let availableWidth = totalWidth - totalSpacing
+		let cardWidth = availableWidth / CGFloat(columnsCount)
+
+		return min(cardWidth, 120)
 	}
 
 	var body: some View {
@@ -36,13 +58,13 @@ struct ContentView: View {
 							ScrollView {
 								LazyVGrid(columns: columns, spacing: spacing) {
 									ForEach(viewModel.visibleCards) { cardVM in
-										CardView(viewModel: cardVM) {
-											viewModel.choose(cardVM)
-										}
+										CardView(
+											viewModel: cardVM,
+											cardSize: calculateCardSize(in: geo)
+										) { viewModel.choose(cardVM) }
 									}
 								}
-								.frame(minHeight: geo.size.height)
-								.padding(.bottom, 100)
+								.padding(.horizontal, spacing)
 							}
 							Spacer()
 						}
@@ -59,6 +81,7 @@ struct ContentView: View {
 			}
 			.padding(.horizontal, 16)
 		}
+
 		.onChange(of: viewModel.isGameOver) { oldValue, newValue in
 			if newValue {
 				DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {

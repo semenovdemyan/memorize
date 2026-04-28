@@ -10,6 +10,11 @@ struct CardView: View {
 	@State private var isAnimatingMatch = false
 	@State private var isShaking = false
 
+	var cardSize: CGFloat = 0
+	private var fontSize: CGFloat {
+		cardSize > 0 ? cardSize * 0.35 : 40
+	}
+
 	let onTap: () -> Void
 
 	var body: some View {
@@ -20,9 +25,15 @@ struct CardView: View {
 				faceDown
 			}
 		}
+		.frame(
+			width: cardSize > 0 ? cardSize : nil,
+			height: cardSize > 0 ? cardSize * 1.5 : nil
+		)
 		.aspectRatio(2 / 3, contentMode: .fit)
 		.onTapGesture {
-			print("onTap gesture called for card with id: \(viewModel.card.id), content is \(viewModel.card.content)")
+			print(
+				"onTap gesture called for card with id: \(viewModel.card.id), content is \(viewModel.card.content)"
+			)
 			onTap()
 		}
 		.modifier(ShakeEffect(animatableData: isShaking ? 1 : 0))
@@ -57,7 +68,7 @@ extension CardView {
 		ZStack {
 			Circle()
 				.glassEffect()
-				.shadow(radius: 30)
+				.shadow(radius: cardSize > 0 ? cardSize * 0.1 : 30)
 				.overlay(
 					Group {
 						if viewModel.isMatched {
@@ -71,14 +82,20 @@ extension CardView {
 				)
 
 			Text(viewModel.card.content)
-				.font(.title)
+				.font(.system(size: fontSize))
+				.minimumScaleFactor(0.5)
 		}
 	}
 
 	private var faceDown: some View {
 		Circle()
 			.adaptiveGlass()
-			.overlay(Circle().stroke(Color.gray.opacity(0.3), lineWidth: 1))
+			.overlay(
+				Circle().stroke(
+					Color.gray.opacity(0.3),
+					lineWidth: cardSize > 0 ? max(1, cardSize * 0.02) : 1
+				)
+			)
 	}
 }
 

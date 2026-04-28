@@ -11,6 +11,7 @@ final class ContentViewModel: ObservableObject {
 	@Published private(set) var cards: [CardViewModel] = []
 	@Published var cardsCount: Int = 8
 	@Published var isGameOver: Bool = false
+	@Published private(set) var discardedCards: [CardViewModel] = []
 
 	private var firstSelectedCard: CardViewModel?
 	private var isWaitingForReset = false
@@ -33,6 +34,7 @@ final class ContentViewModel: ObservableObject {
 	func resetGame() {
 		isWaitingForReset = false
 		firstSelectedCard = nil
+		discardedCards.removeAll()
 
 		let selected = baseEmojis.shuffled().prefix(cardsCount / 2)
 		let allEmojis = (selected + selected).shuffled()
@@ -103,6 +105,11 @@ final class ContentViewModel: ObservableObject {
 	}
 
 	private func handleMatch(_ card1: CardViewModel, _ card2: CardViewModel) {
+		guard !card1.isMatched && !card2.isMatched else { return }
+		
+		discardedCards.append(card1)
+		discardedCards.append(card2)
+		
 		card1.markAsMatched()
 		card2.markAsMatched()
 		firstSelectedCard = nil
