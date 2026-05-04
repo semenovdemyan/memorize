@@ -12,6 +12,7 @@ final class ContentViewModel: ObservableObject {
 	@Published var cardsCount: Int = 8
 	@Published var isGameOver: Bool = false
 	@Published private(set) var discardedCards: [CardViewModel] = []
+	@Published var isShuffling: Bool = false
 
 	private var firstSelectedCard: CardViewModel?
 	private var isWaitingForReset = false
@@ -44,11 +45,25 @@ final class ContentViewModel: ObservableObject {
 		cards = newCards
 	}
 
+	//	func shuffleCards() {
+	//		guard !cards.isEmpty else { return }
+	//		cards.shuffle()
+	//		firstSelectedCard = nil
+	////		resetGame()
+	//	}
+
 	func shuffleCards() {
-		guard !cards.isEmpty else { return }
-		cards.shuffle()
+		guard !cards.isEmpty, !isShuffling else { return }
+		isShuffling = true
+		withAnimation(.easeInOut(duration: 0.3)) {
+			cards.shuffle()
+		}
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+			self?.isShuffling = false
+		}
+
 		firstSelectedCard = nil
-		resetGame()
 	}
 
 	func increaseCards() {
@@ -106,10 +121,10 @@ final class ContentViewModel: ObservableObject {
 
 	private func handleMatch(_ card1: CardViewModel, _ card2: CardViewModel) {
 		guard !card1.isMatched && !card2.isMatched else { return }
-		
+
 		discardedCards.append(card1)
 		discardedCards.append(card2)
-		
+
 		card1.markAsMatched()
 		card2.markAsMatched()
 		firstSelectedCard = nil

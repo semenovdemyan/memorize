@@ -10,12 +10,24 @@ struct CardView: View {
 	@State private var isAnimatingMatch = false
 	@State private var isShaking = false
 
-	var cardSize: CGFloat = 0
-	private var fontSize: CGFloat {
-		cardSize > 0 ? cardSize * 0.35 : 40
+	let cardSize: CGFloat
+	let onTap: () -> Void
+
+	private var cornerRadius: CGFloat {
+		cardSize * 0.15
 	}
 
-	let onTap: () -> Void
+	private var fontSize: CGFloat {
+		cardSize * 0.35
+	}
+
+	private var strokeWidth: CGFloat {
+		max(1, cardSize * 0.02)
+	}
+
+	private var shadowRadius: CGFloat {
+		cardSize * 0.1
+	}
 
 	var body: some View {
 		ZStack {
@@ -25,11 +37,7 @@ struct CardView: View {
 				faceDown
 			}
 		}
-		.frame(
-			width: cardSize > 0 ? cardSize : nil,
-			height: cardSize > 0 ? cardSize * 1.5 : nil
-		)
-		.aspectRatio(2 / 3, contentMode: .fit)
+		.frame(width: cardSize, height: cardSize * 1.5)
 		.onTapGesture {
 			print(
 				"onTap gesture called for card with id: \(viewModel.card.id), content is \(viewModel.card.content)"
@@ -66,15 +74,22 @@ extension CardView {
 	@ViewBuilder
 	private var faceUp: some View {
 		ZStack {
-			Circle()
-				.glassEffect()
-				.shadow(radius: cardSize > 0 ? cardSize * 0.1 : 30)
+			RoundedRectangle(cornerRadius: cornerRadius)
+				.fill(.ultraThinMaterial)
+				.shadow(radius: shadowRadius)
+				.overlay(
+					RoundedRectangle(cornerRadius: cornerRadius)
+						.stroke(
+							viewModel.isMatched ? Color.green : Color.gray.opacity(0.3),
+							lineWidth: strokeWidth
+						)
+				)
 				.overlay(
 					Group {
 						if viewModel.isMatched {
-							Circle()
-								.stroke(.green, lineWidth: 2)
-								.scaleEffect(isAnimatingMatch ? 1.3 : 1.0)
+							RoundedRectangle(cornerRadius: cornerRadius)
+								.stroke(Color.green, lineWidth: strokeWidth * 2)
+								.scaleEffect(isAnimatingMatch ? 1.1 : 1.0)
 								.opacity(isAnimatingMatch ? 0 : 1)
 								.animation(.easeOut(duration: 0.6), value: isAnimatingMatch)
 						}
@@ -84,23 +99,29 @@ extension CardView {
 			Text(viewModel.card.content)
 				.font(.system(size: fontSize))
 				.minimumScaleFactor(0.5)
+				.padding(cardSize * 0.1)
+				.multilineTextAlignment(.center)
 		}
 	}
 
+	@ViewBuilder
 	private var faceDown: some View {
-		Circle()
-			.adaptiveGlass()
+		RoundedRectangle(cornerRadius: cornerRadius)
+			.fill(.ultraThinMaterial)
 			.overlay(
-				Circle().stroke(
-					Color.gray.opacity(0.3),
-					lineWidth: cardSize > 0 ? max(1, cardSize * 0.02) : 1
-				)
+				RoundedRectangle(cornerRadius: cornerRadius)
+					.stroke(Color.gray.opacity(0.3), lineWidth: strokeWidth)
+			)
+			.overlay(
+				Text(" ")
+					.font(.system(size: fontSize * 0.6))
+					.foregroundColor(.gray.opacity(0.5))
 			)
 	}
 }
 
 struct ShakeEffect: GeometryEffect {
-	var amount: CGFloat = 10
+	var amount: CGFloat = 8
 	var shakesPerUnit: CGFloat = 4
 	var animatableData: CGFloat
 

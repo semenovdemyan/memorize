@@ -87,6 +87,7 @@ struct TopPanelView: View {
 					}
 				}
 			}
+			.padding(.horizontal, 16)
 		}
 	}
 }

@@ -49,5 +49,6 @@ struct ControlPanelView: View {
 			.adaptiveGlass()
 			.foregroundColor(.gray)
 		}
+		.padding(.horizontal, 16)
 	}
 }

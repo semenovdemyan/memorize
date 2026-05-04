@@ -1,7 +1,9 @@
+//
 //  ContentView.swift
 //  Memo Card App
-
+//
 //  Created by Demian on 28.01.2026.
+//
 
 import SwiftUI
 
@@ -15,11 +17,14 @@ struct ContentView: View {
 	private let spacing: CGFloat = 12
 
 	private var columnsCount: Int {
+		let baseCount: Int
 		if horizontalSizeClass == .regular {
-			return 4
+			baseCount = 4
 		} else {
-			return verticalSizeClass == .compact ? 8 : 4
+			baseCount = verticalSizeClass == .compact ? 8 : 4
 		}
+
+		return baseCount > 10 ? 6 : baseCount
 	}
 
 	private var columns: [GridItem] {
@@ -34,8 +39,7 @@ struct ContentView: View {
 		let totalSpacing = spacing * CGFloat(columnsCount + 2)
 		let availableWidth = totalWidth - totalSpacing
 		let cardWidth = availableWidth / CGFloat(columnsCount)
-
-		return min(cardWidth, 120)
+		return min(cardWidth, 60)
 	}
 
 	var body: some View {
@@ -47,41 +51,26 @@ struct ContentView: View {
 				.scaleEffect(1.2)
 
 			VStack {
+
+				//				TopPanelView(viewModel: viewModel)
+
 				if showEndGame {
 					EndOfGameView(viewModel: viewModel)
 						.transition(.scale.combined(with: .opacity))
 						.zIndex(1)
 				} else {
-					GeometryReader { geo in
-						HStack {
-							Spacer()
-							ScrollView {
-								LazyVGrid(columns: columns, spacing: spacing) {
-									ForEach(viewModel.visibleCards) { cardVM in
-										CardView(
-											viewModel: cardVM,
-											cardSize: calculateCardSize(in: geo)
-										) { viewModel.choose(cardVM) }
-									}
-								}
-								.padding(.horizontal, spacing)
-							}
-							Spacer()
-						}
-					}
-					.id(viewModel.visibleCards.count)
+					GameBoardView(
+						viewModel: viewModel,
+						baseColumns: columns,
+						spacing: spacing,
+						calculateCardSize: calculateCardSize
+					)
 				}
-			}
-			.animation(.easeInOut(duration: 0.5), value: showEndGame)
 
-			VStack {
-				TopPanelView(viewModel: viewModel)
-				Spacer()
 				ControlPanelView(viewModel: viewModel)
 			}
-			.padding(.horizontal, 16)
+			.animation(.easeInOut(duration: 0.5), value: showEndGame)
 		}
-
 		.onChange(of: viewModel.isGameOver) { oldValue, newValue in
 			if newValue {
 				DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
