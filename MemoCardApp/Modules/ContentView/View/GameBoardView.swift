@@ -78,7 +78,6 @@ struct GameBoardView: View {
 		return neededHeight
 	}
 
-	// MARK: - Body
 	var body: some View {
 		GeometryReader { geo in
 			let cardSize = calculateDynamicCardSize(in: geo)
@@ -98,7 +97,10 @@ struct GameBoardView: View {
 			)
 		}
 		.frame(maxWidth: .infinity, maxHeight: .infinity)
-		.id(viewModel.isShuffling)
+		.animation(
+			.spring(response: 0.5, dampingFraction: 0.8),
+			value: viewModel.visibleCards
+		)
 	}
 
 	@ViewBuilder

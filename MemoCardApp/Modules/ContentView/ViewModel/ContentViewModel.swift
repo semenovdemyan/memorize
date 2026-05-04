@@ -45,25 +45,19 @@ final class ContentViewModel: ObservableObject {
 		cards = newCards
 	}
 
-	//	func shuffleCards() {
-	//		guard !cards.isEmpty else { return }
-	//		cards.shuffle()
-	//		firstSelectedCard = nil
-	////		resetGame()
-	//	}
-
 	func shuffleCards() {
 		guard !cards.isEmpty, !isShuffling else { return }
+
 		isShuffling = true
-		withAnimation(.easeInOut(duration: 0.3)) {
+
+		withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
 			cards.shuffle()
 		}
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
 			self?.isShuffling = false
+			self?.firstSelectedCard = nil
 		}
-
-		firstSelectedCard = nil
 	}
 
 	func increaseCards() {
