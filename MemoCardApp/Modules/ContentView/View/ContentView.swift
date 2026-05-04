@@ -1,24 +1,45 @@
+//
 //  ContentView.swift
 //  Memo Card App
-
+//
 //  Created by Demian on 28.01.2026.
-//MARK: View — только отображает и шлёт события
-//MARK: ViewModel — управляет состоянием и логикой
-//MARK: Model — чистые данные (карта, игра, emoji и т.д.)
-
-// CMD + Shift + L  вызывает библиотеку
-// ctrl + CMD + Space вызывает клавиатуру Emoji
+//
 
 import SwiftUI
 
 struct ContentView: View {
 	@StateObject private var viewModel = ContentViewModel()
 	@Environment(\.colorScheme) private var colorScheme
+	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
+	@Environment(\.verticalSizeClass) private var verticalSizeClass
+	@State private var showEndGame = false
 
-	private let spacing: CGFloat = 0
+	private let spacing: CGFloat = 12
+
+	private var columnsCount: Int {
+		let baseCount: Int
+		if horizontalSizeClass == .regular {
+			baseCount = 4
+		} else {
+			baseCount = verticalSizeClass == .compact ? 8 : 4
+		}
+
+		return baseCount > 10 ? 6 : baseCount
+	}
 
 	private var columns: [GridItem] {
-		[GridItem(.adaptive(minimum: 80), spacing: spacing)]
+		Array(
+			repeating: GridItem(.flexible(), spacing: spacing),
+			count: columnsCount
+		)
+	}
+
+	private func calculateCardSize(in geometry: GeometryProxy) -> CGFloat {
+		let totalWidth = geometry.size.width * 0.9
+		let totalSpacing = spacing * CGFloat(columnsCount + 2)
+		let availableWidth = totalWidth - totalSpacing
+		let cardWidth = availableWidth / CGFloat(columnsCount)
+		return min(cardWidth, 60)
 	}
 
 	var body: some View {
@@ -30,37 +51,36 @@ struct ContentView: View {
 				.scaleEffect(1.2)
 
 			VStack {
-				if viewModel.isGameOver {
+
+				//				TopPanelView(viewModel: viewModel)
+
+				if showEndGame {
 					EndOfGameView(viewModel: viewModel)
-						.transition(.scale)
-						.transition(.opacity)
+						.transition(.scale.combined(with: .opacity))
 						.zIndex(1)
-
 				} else {
-					GeometryReader { geo in
-						HStack {
-							Spacer()
-							ScrollView {
-								LazyVGrid(columns: columns, spacing: spacing) {
-									ForEach(viewModel.visibleCards) { CardViewModel in
-										CardView(viewModel: CardViewModel) {
-											viewModel.choose(CardViewModel)
-										}
-									}
-								}
-								.frame(minHeight: geo.size.height)
-								.padding(.bottom, 100)
-							}
-
-							Spacer()
-						}
-					}
-					.transition(.scale)
-					.transition(.opacity)
+					GameBoardView(
+						viewModel: viewModel,
+						baseColumns: columns,
+						spacing: spacing,
+						calculateCardSize: calculateCardSize
+					)
 				}
+
+				ControlPanelView(viewModel: viewModel)
 			}
-			.animation(.easeIn, value: viewModel.isGameOver)
-			ControlPanelView(viewModel: viewModel)
+			.animation(.easeInOut(duration: 0.5), value: showEndGame)
+		}
+		.onChange(of: viewModel.isGameOver) { oldValue, newValue in
+			if newValue {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+					withAnimation {
+						showEndGame = true
+					}
+				}
+			} else {
+				showEndGame = false
+			}
 		}
 	}
 }

@@ -1,4 +1,3 @@
-//
 //  ControlPanelView.swift
 //  MemoCardApp
 //
@@ -49,7 +48,7 @@ struct ControlPanelView: View {
 			.padding(14)
 			.adaptiveGlass()
 			.foregroundColor(.gray)
-			.padding(.horizontal, 10)
 		}
+		.padding(.horizontal, 16)
 	}
 }

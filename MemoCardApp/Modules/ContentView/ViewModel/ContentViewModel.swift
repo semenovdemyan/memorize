@@ -1,28 +1,23 @@
 //
 //  ContentViewModel.swift
 //  MemoCardApp
-
+//
 //  Created by Demian on 08.02.2026.
+
 internal import Combine
 import SwiftUI
 
 final class ContentViewModel: ObservableObject {
-	@Published private(set) var cardViewModels: [CardViewModel] = []
+	@Published private(set) var cards: [CardViewModel] = []
 	@Published var cardsCount: Int = 8
 	@Published var isGameOver: Bool = false
-	@Published var isCollectingCards = false
-	@Published var collectAnimationID = UUID()
-	@Published var wrongMatchHapticTrigger: Int = 0
-	@Published private(set) var deckCards: [CardViewModel] = []
 	@Published private(set) var discardedCards: [CardViewModel] = []
-	@Published var score: Int = 0
+	@Published var isShuffling: Bool = false
 
-	var lastDiscardedCard: CardViewModel? {
-		discardedCards.last
-	}
-	var visibleCards: [CardViewModel] {
-		cardViewModels.filter { !$0.isMatched }
-	}
+	private var firstSelectedCard: CardViewModel?
+	private var isWaitingForReset = false
+
+	var visibleCards: [CardViewModel] { cards }
 
 	private let baseEmojis = [
 		"🦅", "🐈", "🦨", "🐄",
@@ -33,49 +28,35 @@ final class ContentViewModel: ObservableObject {
 		"🐘", "🦏", "🐕", "🦌",
 	]
 
-	private var faceUpIndex: Int?
-
 	init() {
 		resetGame()
 	}
 
 	func resetGame() {
+		isWaitingForReset = false
+		firstSelectedCard = nil
+		discardedCards.removeAll()
+
 		let selected = baseEmojis.shuffled().prefix(cardsCount / 2)
 		let allEmojis = (selected + selected).shuffled()
-
 		let newCards = allEmojis.map { CardViewModel(card: Card(content: $0)) }
 
-		let initialDealCount = min(8, newCards.count)
-		cardViewModels = Array(newCards.prefix(initialDealCount))
-		deckCards = Array(newCards.dropFirst(initialDealCount))
-		discardedCards = []
-
-		faceUpIndex = nil
 		isGameOver = false
+		cards = newCards
 	}
 
 	func shuffleCards() {
-		guard !cardViewModels.isEmpty else { return }
+		guard !cards.isEmpty, !isShuffling else { return }
 
-		faceUpIndex = nil
+		isShuffling = true
 
-		withAnimation(.easeInOut(duration: 0.5)) {
-			for index in cardViewModels.indices {
-				cardViewModels[index].isFaceUp = false
-			}
-			cardViewModels.shuffle()
+		withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+			cards.shuffle()
 		}
-	}
 
-	func dealFourCards() {
-		guard !deckCards.isEmpty else { return }
-
-		let cardsToDeal = min(4, deckCards.count)
-		let newCards = Array(deckCards.prefix(cardsToDeal))
-
-		withAnimation(.spring(response: 0.5, dampingFraction: 0.7)) {
-			deckCards.removeFirst(cardsToDeal)
-			cardViewModels.append(contentsOf: newCards)
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+			self?.isShuffling = false
+			self?.firstSelectedCard = nil
 		}
 	}
 
@@ -91,53 +72,74 @@ final class ContentViewModel: ObservableObject {
 		resetGame()
 	}
 
-	func choose(_ cardViewModel: CardViewModel) {
-		guard
-			let chosenIndex = cardViewModels.firstIndex(where: {
-				$0.id == cardViewModel.id
-			}),
-			!cardViewModels[chosenIndex].isMatched,
-			!cardViewModels[chosenIndex].isFaceUp
-		else { return }
+	func choose(_ card: CardViewModel) {
+		guard canSelectCard(card) else { return }
 
-		guard let matchIndex = faceUpIndex else {
-			cardViewModels.indices.forEach { cardViewModels[$0].isFaceUp = false }
-			cardViewModels[chosenIndex].isFaceUp = true
-			faceUpIndex = chosenIndex
-			return
+		if let firstCard = firstSelectedCard {
+			handleSecondCard(card, firstCard: firstCard)
+		} else {
+			selectFirstCard(card)
 		}
+	}
 
-		cardViewModels[chosenIndex].isFaceUp = true
-		faceUpIndex = nil
+	private func canSelectCard(_ card: CardViewModel) -> Bool {
+		guard card.isInteractive else { return false }
+		guard !isWaitingForReset else { return false }
+		return true
+	}
 
-		let chosen = cardViewModels[chosenIndex]
-		let matched = cardViewModels[matchIndex]
+	private func selectFirstCard(_ card: CardViewModel) {
+		firstSelectedCard = card
+		card.flip()
+	}
 
-		if chosen.card.content == matched.card.content {
-			cardViewModels[chosenIndex].isMatched = true
-			cardViewModels[matchIndex].isMatched = true
+	private func handleSecondCard(
+		_ secondCard: CardViewModel,
+		firstCard: CardViewModel
+	) {
+		guard firstCard.id != secondCard.id else { return }
+		secondCard.flip()
 
-			DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-				withAnimation(.easeInOut) {
-					let matchedCards = [
-						self.cardViewModels[chosenIndex],
-						self.cardViewModels[matchIndex],
-					]
-					self.cardViewModels.removeAll { $0.isMatched }
-					self.discardedCards.append(contentsOf: matchedCards)
-				}
-				if self.cardViewModels.isEmpty && self.deckCards.isEmpty {
-					DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-						self.isGameOver = true
-					}
-				}
-			}
-			return
+		if areCardsMatching(firstCard, secondCard) {
+			handleMatch(firstCard, secondCard)
+		} else {
+			handleMismatch(firstCard, secondCard)
 		}
+	}
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-			self.cardViewModels[chosenIndex].isFaceUp = false
-			self.cardViewModels[matchIndex].isFaceUp = false
+	private func areCardsMatching(_ card1: CardViewModel, _ card2: CardViewModel)
+		-> Bool
+	{
+		card1.card.content == card2.card.content
+	}
+
+	private func handleMatch(_ card1: CardViewModel, _ card2: CardViewModel) {
+		guard !card1.isMatched && !card2.isMatched else { return }
+
+		discardedCards.append(card1)
+		discardedCards.append(card2)
+
+		card1.markAsMatched()
+		card2.markAsMatched()
+		firstSelectedCard = nil
+		checkGameOver()
+	}
+
+	private func handleMismatch(_ card1: CardViewModel, _ card2: CardViewModel) {
+		card1.showMismatch()
+		card2.showMismatch()
+
+		firstSelectedCard = nil
+		isWaitingForReset = true
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+			card1.flip()
+			card2.flip()
+			self?.isWaitingForReset = false
 		}
+	}
+
+	private func checkGameOver() {
+		isGameOver = cards.allSatisfy { $0.isMatched }
 	}
 }
