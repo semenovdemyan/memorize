@@ -12,6 +12,7 @@ struct GameBoardView: View {
 	let baseColumns: [GridItem]
 	let spacing: CGFloat
 	let calculateCardSize: (GeometryProxy) -> CGFloat
+	let discardDeckFrame: CGRect
 
 	@State private var animationTrigger = false
 
@@ -74,22 +75,20 @@ struct GameBoardView: View {
 	private func calculateOptimalHeight(for geometry: GeometryProxy) -> CGFloat {
 		let cardSize = calculateDynamicCardSize(in: geometry)
 		let neededHeight =
-			CGFloat(rowsCount) * (cardSize * 1.5) + CGFloat(rowsCount - 1) * spacing
+			CGFloat(rowsCount) * (cardSize * CardMetrics.aspectRatio)
+				+ CGFloat(rowsCount - 1) * spacing
 		return neededHeight
 	}
 
 	var body: some View {
 		GeometryReader { geo in
 			let cardSize = calculateDynamicCardSize(in: geo)
-			let optimalHeight = calculateOptimalHeight(for: geo)
-			let needsScroll = optimalHeight >= geo.size.height
 
 			LazyVGrid(columns: dynamicColumns, spacing: spacing) {
 				cardContent(cardSize: cardSize)
 			}
 			.padding(.horizontal, spacing)
 			.padding(.vertical, spacing)
-			.frameIfNeeded(height: needsScroll ? nil : optimalHeight)
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.animation(
 				viewModel.isShuffling ? .easeInOut(duration: 0.3) : .default,
@@ -108,19 +107,9 @@ struct GameBoardView: View {
 		ForEach(viewModel.visibleCards) { cardVM in
 			CardView(
 				viewModel: cardVM,
-				cardSize: cardSize
+				cardSize: cardSize,
+				discardDeckFrame: discardDeckFrame
 			) { viewModel.choose(cardVM) }
-		}
-	}
-}
-
-extension View {
-	@ViewBuilder
-	func frameIfNeeded(height: CGFloat?) -> some View {
-		if let height = height {
-			self.frame(height: height)
-		} else {
-			self
 		}
 	}
 }

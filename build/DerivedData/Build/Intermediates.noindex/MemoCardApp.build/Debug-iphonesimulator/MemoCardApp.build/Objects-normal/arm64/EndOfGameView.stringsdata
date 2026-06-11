@@ -1,0 +1,40 @@
+{
+  "source": "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/EndOfGameView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "End of Game",
+        "location": {
+          "startingColumn": 9,
+          "startingLine": 13
+        }
+      },
+      {
+        "comment": "",
+        "key": "Score: %lld",
+        "location": {
+          "startingColumn": 11,
+          "startingLine": 20
+        }
+      },
+      {
+        "comment": "",
+        "key": "Time: %@",
+        "location": {
+          "startingColumn": 11,
+          "startingLine": 24
+        }
+      },
+      {
+        "comment": "",
+        "key": "Play again",
+        "location": {
+          "startingColumn": 11,
+          "startingLine": 35
+        }
+      }
+    ]
+  },
+  "version": 1
+}

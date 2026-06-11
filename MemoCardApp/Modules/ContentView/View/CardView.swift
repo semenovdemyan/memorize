@@ -8,52 +8,69 @@ import SwiftUI
 struct CardView: View {
 	@ObservedObject var viewModel: CardViewModel
 	@State private var isAnimatingMatch = false
-	@State private var isShaking = false
+	@State private var isAnimatingMismatch = false
+	@State private var cardFrame: CGRect = .zero
+	@State private var flyOffset: CGSize = .zero
+	@State private var flyScale: CGFloat = 1
 
 	let cardSize: CGFloat
+	let discardDeckFrame: CGRect
 	let onTap: () -> Void
 
-	private var cornerRadius: CGFloat {
-		cardSize * 0.15
+	private var cardShape: RoundedRectangle {
+		RoundedRectangle(cornerRadius: CardMetrics.cornerRadius)
 	}
 
-	private var fontSize: CGFloat {
-		cardSize * 0.35
-	}
-
-	private var strokeWidth: CGFloat {
-		max(1, cardSize * 0.02)
-	}
-
-	private var shadowRadius: CGFloat {
-		cardSize * 0.1
+	private var isTappable: Bool {
+		!viewModel.isDiscarded && !viewModel.isFlyingToDiscard
 	}
 
 	var body: some View {
 		ZStack {
-			if viewModel.isFaceUp || viewModel.isMatched {
-				faceUp
-			} else {
-				faceDown
+			tapPlate
+
+			cardContent
+				.frame(width: cardSize, height: cardSize * CardMetrics.aspectRatio)
+				.clipShape(cardShape)
+				.allowsHitTesting(false)
+		}
+		.frame(maxWidth: .infinity, minHeight: cardSize * CardMetrics.aspectRatio)
+		.scaleEffect(flyScale)
+		.offset(flyOffset)
+		.opacity(viewModel.isDiscarded ? 0 : 1)
+		.background {
+			GeometryReader { geometry in
+				Color.clear
+					.onAppear {
+						updateCardFrame(from: geometry)
+					}
+					.onChange(of: geometry.size) { _, _ in
+						updateCardFrame(from: geometry)
+					}
+					.onChange(of: viewModel.isFlyingToDiscard) { _, isFlying in
+						if isFlying {
+							updateCardFrame(from: geometry)
+							beginFlyToDiscardDeck()
+						}
+					}
 			}
 		}
-		.frame(width: cardSize, height: cardSize * 1.5)
-		.onTapGesture {
-			print(
-				"onTap gesture called for card with id: \(viewModel.card.id), content is \(viewModel.card.content)"
-			)
-			onTap()
+		.onChange(of: viewModel.isFlyingToDiscard) { _, isFlying in
+			if !isFlying, viewModel.isDiscarded {
+				flyOffset = .zero
+				flyScale = 1
+			}
 		}
-		.modifier(ShakeEffect(animatableData: isShaking ? 1 : 0))
+		.modifier(ShakeEffect(animatableData: isAnimatingMismatch ? 1 : 0))
 		.animation(
 			.linear(duration: 0.07).repeatCount(4, autoreverses: true),
-			value: isShaking
+			value: isAnimatingMismatch
 		)
 		.onChange(of: viewModel.shouldShowMismatch) { oldValue, newValue in
 			if newValue && !oldValue {
-				isShaking = true
+				isAnimatingMismatch = true
 				DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-					isShaking = false
+					isAnimatingMismatch = false
 				}
 			}
 		}
@@ -68,60 +85,84 @@ struct CardView: View {
 			}
 		}
 	}
+
+	@ViewBuilder
+	private var cardContent: some View {
+		if viewModel.isFaceUp || viewModel.isMatched {
+			faceUp
+		} else {
+			CardFaceView(
+				content: viewModel.card.content,
+				width: cardSize,
+				isFaceUp: false
+			)
+		}
+	}
+
+	private var tapPlate: some View {
+		Button(action: onTap) {
+			cardShape
+				.fill(Color.white.opacity(0.001))
+				.frame(maxWidth: .infinity, maxHeight: .infinity)
+				.contentShape(cardShape)
+		}
+		.buttonStyle(.plain)
+		.disabled(!isTappable)
+	}
+
+	private func updateCardFrame(from geometry: GeometryProxy) {
+		cardFrame = geometry.frame(in: .named(GameCoordinateSpace.name))
+	}
+
+	private func beginFlyToDiscardDeck() {
+		let targetScale = discardDeckFrame.width > 0
+			? discardDeckFrame.width / cardSize
+			: 0.15
+
+		withAnimation(.easeInOut(duration: 0.5)) {
+			flyOffset = flyOffsetTowardDiscardDeck()
+			flyScale = targetScale
+		}
+	}
+
+	private func flyOffsetTowardDiscardDeck() -> CGSize {
+		guard discardDeckFrame != .zero, cardFrame != .zero else {
+			return CGSize(width: cardSize * 1.5, height: -cardSize * 2)
+		}
+
+		let cardCenter = CGPoint(x: cardFrame.midX, y: cardFrame.midY)
+		let deckCenter = CGPoint(x: discardDeckFrame.midX, y: discardDeckFrame.midY)
+
+		return CGSize(
+			width: deckCenter.x - cardCenter.x,
+			height: deckCenter.y - cardCenter.y
+		)
+	}
 }
 
 extension CardView {
 	@ViewBuilder
 	private var faceUp: some View {
-		ZStack {
-			RoundedRectangle(cornerRadius: cornerRadius)
-				.fill(.ultraThinMaterial)
-				.shadow(radius: shadowRadius)
-				.overlay(
-					RoundedRectangle(cornerRadius: cornerRadius)
-						.stroke(
-							viewModel.isMatched ? Color.green : Color.gray.opacity(0.3),
-							lineWidth: strokeWidth
-						)
-				)
-				.overlay(
-					Group {
-						if viewModel.isMatched {
-							RoundedRectangle(cornerRadius: cornerRadius)
-								.stroke(Color.green, lineWidth: strokeWidth * 2)
-								.scaleEffect(isAnimatingMatch ? 1.1 : 1.0)
-								.opacity(isAnimatingMatch ? 0 : 1)
-								.animation(.easeOut(duration: 0.6), value: isAnimatingMatch)
-						}
-					}
-				)
-
-			Text(viewModel.card.content)
-				.font(.system(size: fontSize))
-				.minimumScaleFactor(0.5)
-				.padding(cardSize * 0.1)
-				.multilineTextAlignment(.center)
+		CardFaceView(
+			content: viewModel.card.content,
+			width: cardSize,
+			isFaceUp: true
+		)
+		.overlay {
+			if viewModel.isMatched {
+				cardShape
+					.fill(.clear)
+					.stroke(Color.green, lineWidth: 1)
+					.scaleEffect(isAnimatingMatch ? 1.2 : 1.0)
+					.opacity(isAnimatingMatch ? 0 : 1)
+					.animation(.easeOut(duration: 0.4), value: isAnimatingMatch)
+			}
 		}
-	}
-
-	@ViewBuilder
-	private var faceDown: some View {
-		RoundedRectangle(cornerRadius: cornerRadius)
-			.fill(.ultraThinMaterial)
-			.overlay(
-				RoundedRectangle(cornerRadius: cornerRadius)
-					.stroke(Color.gray.opacity(0.3), lineWidth: strokeWidth)
-			)
-			.overlay(
-				Text(" ")
-					.font(.system(size: fontSize * 0.6))
-					.foregroundColor(.gray.opacity(0.5))
-			)
 	}
 }
 
 struct ShakeEffect: GeometryEffect {
-	var amount: CGFloat = 8
+	var amount: CGFloat = 12
 	var shakesPerUnit: CGFloat = 4
 	var animatableData: CGFloat
 

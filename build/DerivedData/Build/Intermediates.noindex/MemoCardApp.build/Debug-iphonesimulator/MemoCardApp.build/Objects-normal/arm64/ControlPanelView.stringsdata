@@ -1,0 +1,16 @@
+{
+  "source": "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/ControlPanelView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Shuffle",
+        "location": {
+          "startingColumn": 11,
+          "startingLine": 30
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -1,0 +1,24 @@
+{
+  "source": "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/CardsCounterView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 10,
+          "startingLine": 14
+        }
+      },
+      {
+        "comment": "",
+        "key": "pairs",
+        "location": {
+          "startingColumn": 10,
+          "startingLine": 15
+        }
+      }
+    ]
+  },
+  "version": 1
+}

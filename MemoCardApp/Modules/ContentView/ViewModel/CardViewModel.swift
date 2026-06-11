@@ -6,6 +6,7 @@
 
 internal import Combine
 import Foundation
+import SwiftUI
 
 final class CardViewModel: ObservableObject, Identifiable {
 	let card: Card
@@ -13,6 +14,9 @@ final class CardViewModel: ObservableObject, Identifiable {
 	@Published private(set) var isFaceUp: Bool = false
 	@Published private(set) var isMatched: Bool = false
 	@Published private(set) var shouldShowMismatch = false
+	@Published var isShowingMatchAnimation = false
+	@Published private(set) var isDiscarded = false
+	@Published private(set) var isFlyingToDiscard = false
 
 	private var mismatchWorkItem: DispatchWorkItem?
 	var id: UUID { card.id }
@@ -22,7 +26,7 @@ final class CardViewModel: ObservableObject, Identifiable {
 	}
 
 	var isInteractive: Bool {
-		guard !isMatched else { return false }
+		guard !isMatched, !isDiscarded else { return false }
 		return !isFaceUp
 	}
 
@@ -45,9 +49,15 @@ final class CardViewModel: ObservableObject, Identifiable {
 		isFaceUp = true
 	}
 
+	func showMatch() {
+		isShowingMatchAnimation = true
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+			self?.isShowingMatchAnimation = false
+		}
+	}
+
 	func showMismatch() {
 		mismatchWorkItem?.cancel()
-
 		let workItem = DispatchWorkItem { [weak self] in
 			guard let self = self else { return }
 			self.shouldShowMismatch = true
@@ -59,6 +69,17 @@ final class CardViewModel: ObservableObject, Identifiable {
 
 		mismatchWorkItem = workItem
 		DispatchQueue.main.async(execute: workItem)
+
+		isShowingMatchAnimation = false
+	}
+
+	func flyToDiscard() {
+		isFlyingToDiscard = true
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+			self?.isDiscarded = true
+			self?.isFlyingToDiscard = false
+		}
 	}
 }
 

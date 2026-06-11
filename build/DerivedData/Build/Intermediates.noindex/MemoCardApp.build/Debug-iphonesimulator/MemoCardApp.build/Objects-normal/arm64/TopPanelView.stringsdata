@@ -1,0 +1,16 @@
+{
+  "source": "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/TopPanelView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "%lld",
+        "location": {
+          "startingColumn": 12,
+          "startingLine": 121
+        }
+      }
+    ]
+  },
+  "version": 1
+}

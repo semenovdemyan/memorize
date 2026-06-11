@@ -6,6 +6,8 @@
 import SwiftUI
 
 struct AdaptiveGlassModifier: ViewModifier {
+	var cornerRadius: CGFloat = 16
+
 	func body(content: Content) -> some View {
 		if #available(iOS 26, *) {
 			content.glassEffect()
@@ -13,14 +15,14 @@ struct AdaptiveGlassModifier: ViewModifier {
 			content
 				.background(
 					.ultraThinMaterial,
-					in: RoundedRectangle(cornerRadius: 16)
+					in: RoundedRectangle(cornerRadius: cornerRadius)
 				)
 		}
 	}
 }
 
 extension View {
-	func adaptiveGlass() -> some View {
-		modifier(AdaptiveGlassModifier())
+	func adaptiveGlass(cornerRadius: CGFloat = 16) -> some View {
+		modifier(AdaptiveGlassModifier(cornerRadius: cornerRadius))
 	}
 }
