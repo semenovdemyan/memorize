@@ -110,6 +110,8 @@ final class ContentViewModel: ObservableObject {
 			return 4
 		case 40:
 			return 5
+		case 48:
+			return 6
 		default:
 			return 6
 		}

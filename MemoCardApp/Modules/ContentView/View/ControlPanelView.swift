@@ -32,7 +32,7 @@ struct ControlPanelView: View {
 				}
 				.frame(width: 145, height: 64)
 				.adaptiveGlass()
-				.disabled(viewModel.cardsCount >= 48)
+				.disabled(viewModel.cardsCount > 48)
 
 				Spacer()
 
