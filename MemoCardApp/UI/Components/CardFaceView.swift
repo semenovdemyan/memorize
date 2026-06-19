@@ -4,7 +4,7 @@
 import SwiftUI
 
 enum CardMetrics {
-	static let cornerRadius: CGFloat = 16
+	static let cornerRadius: CGFloat = 1.5
 	static let aspectRatio: CGFloat = 1.5
 }
 

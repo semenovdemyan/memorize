@@ -17,6 +17,15 @@ final class CardViewModel: ObservableObject, Identifiable {
 	@Published var isShowingMatchAnimation = false
 	@Published private(set) var isDiscarded = false
 	@Published private(set) var isFlyingToDiscard = false
+	@Published private(set) var isFlyingFromDiscard = false
+	@Published var isAppearing = false
+
+	func appearFromDiscard() {
+		isAppearing = true
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+			self.isAppearing = false
+		}
+	}
 
 	private var mismatchWorkItem: DispatchWorkItem?
 	var id: UUID { card.id }
@@ -49,6 +58,25 @@ final class CardViewModel: ObservableObject, Identifiable {
 		isFaceUp = true
 	}
 
+	func markAsUnmatched() {
+		isMatched = false
+		isDiscarded = false
+		isFlyingToDiscard = false
+		isFlyingFromDiscard = false
+	}
+
+	func resetToFaceDown() {
+		isFaceUp = false
+		isMatched = false
+		isDiscarded = false
+		isFlyingToDiscard = false
+		isFlyingFromDiscard = false
+		shouldShowMismatch = false
+		isShowingMatchAnimation = false
+		mismatchWorkItem?.cancel()
+		mismatchWorkItem = nil
+	}
+
 	func showMatch() {
 		isShowingMatchAnimation = true
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
@@ -79,6 +107,15 @@ final class CardViewModel: ObservableObject, Identifiable {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
 			self?.isDiscarded = true
 			self?.isFlyingToDiscard = false
+		}
+	}
+
+	func flyFromDiscard() {
+		isDiscarded = false
+		isFlyingFromDiscard = true
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+			self?.isFlyingFromDiscard = false
 		}
 	}
 }
