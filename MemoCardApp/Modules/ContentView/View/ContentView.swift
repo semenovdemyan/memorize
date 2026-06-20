@@ -78,7 +78,7 @@ struct ContentView: View {
 		}
 		.onChange(of: viewModel.isGameOver) { oldValue, newValue in
 			if newValue {
-				DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 					withAnimation {
 						showEndGame = true
 					}

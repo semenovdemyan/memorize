@@ -198,7 +198,6 @@ final class ContentViewModel: ObservableObject {
 		}
 
 		let currentRow = rows[rowIndex]
-		let delay = 0.15
 
 		for card in currentRow {
 			card.flyToDiscard()
@@ -309,11 +308,11 @@ final class ContentViewModel: ObservableObject {
 		changeScore(by: Self.matchBonus)
 		//		replenishBonusTime()
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
 			card1.flyToDiscard()
 			card2.flyToDiscard()
 
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+			DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
 				card1.markAsMatched()
 				card2.markAsMatched()
 				self?.discardedCards.append(card1)
@@ -370,7 +369,6 @@ final class ContentViewModel: ObservableObject {
 		}
 
 		let currentRow = rows[rowIndex]
-		let delay = 0.15
 
 		for card in currentRow {
 			card.flyToDiscard()
@@ -425,9 +423,8 @@ final class ContentViewModel: ObservableObject {
 		}
 
 		let card = returningCards[index]
-		let delay = 0.08
 
-		DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.08) {
 			card.flyFromDiscard()
 
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
