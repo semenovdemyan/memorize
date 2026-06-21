@@ -18,11 +18,15 @@ struct CardFaceView: View {
 	}
 
 	private var fontSize: CGFloat {
-		width * 0.35
+		width * 0.4
 	}
 
 	private var shadowRadius: CGFloat {
 		width * 0.1
+	}
+
+	private var paddingOverShadow: CGFloat {
+		shadowRadius * 0.6
 	}
 
 	var body: some View {
@@ -30,7 +34,8 @@ struct CardFaceView: View {
 			shape
 				.fill(.clear)
 				.adaptiveGlass(cornerRadius: CardMetrics.cornerRadius)
-				.shadow(radius: shadowRadius)
+				.adaptiveGlass()
+				.shadow(radius: isFaceUp ? shadowRadius : 0)
 
 			if isFaceUp {
 				Text(content)
@@ -39,8 +44,8 @@ struct CardFaceView: View {
 					.padding(width * 0.1)
 					.multilineTextAlignment(.center)
 			}
-		}
-		.frame(width: width, height: width * CardMetrics.aspectRatio)
-		.clipShape(shape)
+		}.padding(25)
+			.frame(width: width + 20, height: width + 20)
+			.clipShape(shape)
 	}
 }

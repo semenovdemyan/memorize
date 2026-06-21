@@ -14,8 +14,6 @@ struct GameBoardView: View {
 	let calculateCardSize: (GeometryProxy) -> CGFloat
 	let discardDeckFrame: CGRect
 
-	@State private var animationTrigger = false
-
 	private var cardsCount: Int {
 		viewModel.visibleCards.count
 	}
@@ -56,28 +54,8 @@ struct GameBoardView: View {
 	private func calculateDynamicCardSize(in geometry: GeometryProxy) -> CGFloat {
 		let baseSize = calculateCardSize(geometry)
 		let multiplier = cardSizeMultiplier()
-		let maxSize: CGFloat
-
-		switch cardsCount {
-		case 8...10:
-			maxSize = 190
-		default:
-			maxSize = 60
-		}
-
+		let maxSize: CGFloat = cardsCount <= 10 ? 190 : 60
 		return min(baseSize * multiplier, maxSize)
-	}
-
-	private var rowsCount: Int {
-		Int(ceil(CGFloat(cardsCount) / CGFloat(columnsCount)))
-	}
-
-	private func calculateOptimalHeight(for geometry: GeometryProxy) -> CGFloat {
-		let cardSize = calculateDynamicCardSize(in: geometry)
-		let neededHeight =
-			CGFloat(rowsCount) * (cardSize * CardMetrics.aspectRatio)
-				+ CGFloat(rowsCount - 1) * spacing
-		return neededHeight
 	}
 
 	var body: some View {
@@ -85,10 +63,17 @@ struct GameBoardView: View {
 			let cardSize = calculateDynamicCardSize(in: geo)
 
 			LazyVGrid(columns: dynamicColumns, spacing: spacing) {
-				cardContent(cardSize: cardSize)
+				ForEach(viewModel.visibleCards) { cardVM in
+					CardView(
+						viewModel: cardVM,
+						cardSize: cardSize,
+						discardDeckFrame: discardDeckFrame
+					) {
+						viewModel.choose(cardVM)
+					}
+				}
 			}
-			.padding(.horizontal, spacing)
-			.padding(.vertical, spacing)
+			.padding(spacing)
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
 			.animation(
 				viewModel.isShuffling ? .easeInOut(duration: 0.3) : .default,
@@ -100,16 +85,5 @@ struct GameBoardView: View {
 			.spring(response: 0.5, dampingFraction: 0.8),
 			value: viewModel.visibleCards
 		)
-	}
-
-	@ViewBuilder
-	private func cardContent(cardSize: CGFloat) -> some View {
-		ForEach(viewModel.visibleCards) { cardVM in
-			CardView(
-				viewModel: cardVM,
-				cardSize: cardSize,
-				discardDeckFrame: discardDeckFrame
-			) { viewModel.choose(cardVM) }
-		}
 	}
 }

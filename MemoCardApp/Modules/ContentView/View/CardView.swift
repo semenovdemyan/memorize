@@ -3,6 +3,7 @@
 //  MemoCardApp
 //
 //  Created by Demian on 08.02.2026.
+//
 
 import SwiftUI
 
@@ -45,12 +46,10 @@ struct CardView: View {
 
 	var body: some View {
 		ZStack {
-			// Прозрачная кнопка СНИЗУ (чтобы не перекрывать содержимое)
 			tapPlate
 				.frame(width: cardDimensions.width, height: cardDimensions.height)
 				.clipShape(cardShape)
 
-			// Карточка СВЕРХУ
 			cardContent
 				.frame(width: cardDimensions.width, height: cardDimensions.height)
 				.clipShape(cardShape)
@@ -65,16 +64,35 @@ struct CardView: View {
 		.opacity(viewModel.isDiscarded ? 0 : 1)
 		.background(geometryReader)
 		.onChange(of: viewModel.isFlyingToDiscard) { _, isFlying in
-			handleFlyingToDiscardChange(isFlying)
+			if !isFlying, viewModel.isDiscarded {
+				flyOffset = .zero
+				flyScale = 1
+			}
 		}
 		.onChange(of: viewModel.isFlyingFromDiscard) { _, isFlying in
-			handleFlyingFromDiscardChange(isFlying)
+			if !isFlying {
+				appearOffset = .zero
+				appearScale = 1
+				appearOpacity = 1
+			}
 		}
 		.onChange(of: viewModel.shouldShowMismatch) { oldValue, newValue in
-			handleMismatchChange(oldValue, newValue)
+			if newValue && !oldValue {
+				isAnimatingMismatch = true
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+					isAnimatingMismatch = false
+				}
+			}
 		}
 		.onChange(of: viewModel.isMatched) { oldValue, newValue in
-			handleMatchChange(oldValue, newValue)
+			if newValue {
+				withAnimation(.easeOut(duration: 0.6)) {
+					isAnimatingMatch = true
+				}
+				DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+					isAnimatingMatch = false
+				}
+			}
 		}
 		.modifier(ShakeEffect(animatableData: isAnimatingMismatch ? 1 : 0))
 		.animation(
@@ -108,7 +126,6 @@ struct CardView: View {
 		if viewModel.isMatched {
 			cardShape
 				.fill(.clear)
-				.stroke(Color.green, lineWidth: 1)
 				.scaleEffect(isAnimatingMatch ? 1.2 : 1.0)
 				.opacity(isAnimatingMatch ? 0 : 1)
 				.animation(.easeOut(duration: 0.4), value: isAnimatingMatch)
@@ -198,43 +215,6 @@ struct CardView: View {
 			width: deckCenter.x - cardCenter.x,
 			height: deckCenter.y - cardCenter.y
 		)
-	}
-
-	// MARK: - Change Handlers
-
-	private func handleFlyingToDiscardChange(_ isFlying: Bool) {
-		if !isFlying, viewModel.isDiscarded {
-			flyOffset = .zero
-			flyScale = 1
-		}
-	}
-
-	private func handleFlyingFromDiscardChange(_ isFlying: Bool) {
-		if !isFlying {
-			appearOffset = .zero
-			appearScale = 1
-			appearOpacity = 1
-		}
-	}
-
-	private func handleMismatchChange(_ oldValue: Bool, _ newValue: Bool) {
-		if newValue && !oldValue {
-			isAnimatingMismatch = true
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-				isAnimatingMismatch = false
-			}
-		}
-	}
-
-	private func handleMatchChange(_ oldValue: Bool, _ newValue: Bool) {
-		if newValue {
-			withAnimation(.easeOut(duration: 0.6)) {
-				isAnimatingMatch = true
-			}
-			DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-				isAnimatingMatch = false
-			}
-		}
 	}
 }
 
