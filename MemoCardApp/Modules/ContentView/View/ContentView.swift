@@ -13,6 +13,7 @@ struct ContentView: View {
 	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
 	@Environment(\.verticalSizeClass) private var verticalSizeClass
 	@State private var showEndGame = false
+	@State private var discardDeckFrame: CGRect = .zero
 
 	private let spacing: CGFloat = 12
 
@@ -51,8 +52,7 @@ struct ContentView: View {
 				.scaleEffect(1.2)
 
 			VStack {
-
-				//				TopPanelView(viewModel: viewModel)
+				TopPanelView(viewModel: viewModel)
 
 				if showEndGame {
 					EndOfGameView(viewModel: viewModel)
@@ -63,17 +63,22 @@ struct ContentView: View {
 						viewModel: viewModel,
 						baseColumns: columns,
 						spacing: spacing,
-						calculateCardSize: calculateCardSize
+						calculateCardSize: calculateCardSize,
+						discardDeckFrame: discardDeckFrame
 					)
 				}
 
 				ControlPanelView(viewModel: viewModel)
 			}
 			.animation(.easeInOut(duration: 0.5), value: showEndGame)
+			.coordinateSpace(name: GameCoordinateSpace.name)
+			.onPreferenceChange(DiscardDeckFrameKey.self) { frame in
+				discardDeckFrame = frame
+			}
 		}
 		.onChange(of: viewModel.isGameOver) { oldValue, newValue in
 			if newValue {
-				DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+				DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
 					withAnimation {
 						showEndGame = true
 					}

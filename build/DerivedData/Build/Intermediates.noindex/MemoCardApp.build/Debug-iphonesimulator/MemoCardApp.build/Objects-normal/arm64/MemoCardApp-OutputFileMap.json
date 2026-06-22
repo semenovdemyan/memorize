@@ -1,0 +1,199 @@
+{
+  "" : {
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardApp-primary.dia",
+    "emit-module-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardApp-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardApp-primary-emit-module.dia",
+    "pch" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardApp-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardApp-primary.swiftdeps"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Item.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Item.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Item.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Item.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Item.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Item.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Item.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Item.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Item~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/MemoCardAppApp.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardAppApp.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardAppApp.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardAppApp.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardAppApp.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardAppApp.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardAppApp.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardAppApp.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/MemoCardAppApp~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/Model/Card.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Card.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Card.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Card.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Card.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Card.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Card.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Card.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/Card~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/CardView.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardView.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardView.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardView.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardView.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardView.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardView.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardView.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardView~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/CardsCounterView.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardsCounterView.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardsCounterView.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardsCounterView.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardsCounterView.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardsCounterView.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardsCounterView.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardsCounterView.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardsCounterView~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/ContentView.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/ControlPanelView.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelView.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelView.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelView.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelView.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelView.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelView.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelView.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelView~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/EndOfGameView.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/EndOfGameView.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/EndOfGameView.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/EndOfGameView.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/EndOfGameView.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/EndOfGameView.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/EndOfGameView.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/EndOfGameView.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/EndOfGameView~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/FlyingNumberView.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/FlyingNumberView.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/FlyingNumberView.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/FlyingNumberView.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/FlyingNumberView.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/FlyingNumberView.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/FlyingNumberView.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/FlyingNumberView.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/FlyingNumberView~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/GameBoardView.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GameBoardView.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GameBoardView.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GameBoardView.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GameBoardView.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GameBoardView.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GameBoardView.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GameBoardView.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GameBoardView~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/PieView.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/PieView.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/PieView.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/PieView.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/PieView.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/PieView.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/PieView.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/PieView.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/PieView~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/View/TopPanelView.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/TopPanelView.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/TopPanelView.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/TopPanelView.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/TopPanelView.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/TopPanelView.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/TopPanelView.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/TopPanelView.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/TopPanelView~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/ViewModel/CardViewModel.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardViewModel.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardViewModel.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardViewModel.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardViewModel.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardViewModel.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardViewModel.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardViewModel.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardViewModel~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/ViewModel/ContentViewModel.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentViewModel.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentViewModel.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentViewModel.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentViewModel.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentViewModel.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentViewModel.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentViewModel.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ContentViewModel~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/Modules/ContentView/ViewModel/ControlPanelViewModel.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelViewModel.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelViewModel.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelViewModel.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelViewModel.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelViewModel.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelViewModel.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelViewModel.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/ControlPanelViewModel~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/UI/Components/CardFaceView.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardFaceView.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardFaceView.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardFaceView.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardFaceView.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardFaceView.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardFaceView.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardFaceView.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/CardFaceView~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/UI/Modifiers/AdaptiveGlassModifier.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/AdaptiveGlassModifier.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/AdaptiveGlassModifier.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/AdaptiveGlassModifier.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/AdaptiveGlassModifier.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/AdaptiveGlassModifier.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/AdaptiveGlassModifier.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/AdaptiveGlassModifier.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/AdaptiveGlassModifier~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/MemoCardApp/UI/Preferences/DiscardDeckFrameKey.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/DiscardDeckFrameKey.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/DiscardDeckFrameKey.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/DiscardDeckFrameKey.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/DiscardDeckFrameKey.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/DiscardDeckFrameKey.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/DiscardDeckFrameKey.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/DiscardDeckFrameKey.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/DiscardDeckFrameKey~partial.swiftmodule"
+  },
+  "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "const-values" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftconstvalues",
+    "dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GeneratedAssetSymbols.d",
+    "diagnostics" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GeneratedAssetSymbols.dia",
+    "index-unit-output-path" : "/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "swift-dependencies" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GeneratedAssetSymbols.swiftdeps",
+    "swiftmodule" : "/Users/semenoff.dev/Desktop/home tasks/memorize/build/DerivedData/Build/Intermediates.noindex/MemoCardApp.build/Debug-iphonesimulator/MemoCardApp.build/Objects-normal/arm64/GeneratedAssetSymbols~partial.swiftmodule"
+  }
+}

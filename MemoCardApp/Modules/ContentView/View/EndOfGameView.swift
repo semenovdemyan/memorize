@@ -14,6 +14,19 @@ struct EndOfGameView: View {
 				.font(.largeTitle)
 				.foregroundColor(.gray)
 
+			VStack(spacing: 8) {
+				HStack {
+					Image(systemName: "star.fill")
+					Text("Score: \(viewModel.score)")
+				}
+				HStack {
+					Image(systemName: "clock")
+					Text("Time: \(viewModel.elapsedTimeString)")
+				}
+			}
+			.font(.title3)
+			.foregroundStyle(.secondary)
+
 			Button {
 				viewModel.resetGame()
 			} label: {

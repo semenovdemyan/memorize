@@ -6,6 +6,7 @@
 
 internal import Combine
 import Foundation
+import SwiftUI
 
 final class CardViewModel: ObservableObject, Identifiable {
 	let card: Card
@@ -13,6 +14,18 @@ final class CardViewModel: ObservableObject, Identifiable {
 	@Published private(set) var isFaceUp: Bool = false
 	@Published private(set) var isMatched: Bool = false
 	@Published private(set) var shouldShowMismatch = false
+	@Published var isShowingMatchAnimation = false
+	@Published private(set) var isDiscarded = false
+	@Published private(set) var isFlyingToDiscard = false
+	@Published private(set) var isFlyingFromDiscard = false
+	@Published var isAppearing = false
+
+	func appearFromDiscard() {
+		isAppearing = true
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+			self.isAppearing = false
+		}
+	}
 
 	private var mismatchWorkItem: DispatchWorkItem?
 	var id: UUID { card.id }
@@ -22,7 +35,7 @@ final class CardViewModel: ObservableObject, Identifiable {
 	}
 
 	var isInteractive: Bool {
-		guard !isMatched else { return false }
+		guard !isMatched, !isDiscarded else { return false }
 		return !isFaceUp
 	}
 
@@ -45,9 +58,34 @@ final class CardViewModel: ObservableObject, Identifiable {
 		isFaceUp = true
 	}
 
+	func markAsUnmatched() {
+		isMatched = false
+		isDiscarded = false
+		isFlyingToDiscard = false
+		isFlyingFromDiscard = false
+	}
+
+	func resetToFaceDown() {
+		isFaceUp = false
+		isMatched = false
+		isDiscarded = false
+		isFlyingToDiscard = false
+		isFlyingFromDiscard = false
+		shouldShowMismatch = false
+		isShowingMatchAnimation = false
+		mismatchWorkItem?.cancel()
+		mismatchWorkItem = nil
+	}
+
+	func showMatch() {
+		isShowingMatchAnimation = true
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+			self?.isShowingMatchAnimation = false
+		}
+	}
+
 	func showMismatch() {
 		mismatchWorkItem?.cancel()
-
 		let workItem = DispatchWorkItem { [weak self] in
 			guard let self = self else { return }
 			self.shouldShowMismatch = true
@@ -59,6 +97,26 @@ final class CardViewModel: ObservableObject, Identifiable {
 
 		mismatchWorkItem = workItem
 		DispatchQueue.main.async(execute: workItem)
+
+		isShowingMatchAnimation = false
+	}
+
+	func flyToDiscard() {
+		isFlyingToDiscard = true
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+			self?.isDiscarded = true
+			self?.isFlyingToDiscard = false
+		}
+	}
+
+	func flyFromDiscard() {
+		isDiscarded = false
+		isFlyingFromDiscard = true
+
+		DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [weak self] in
+			self?.isFlyingFromDiscard = false
+		}
 	}
 }
 
